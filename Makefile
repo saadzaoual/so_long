@@ -1,27 +1,33 @@
-NAME := so_long
+NAME = so_long
 
-SRC := so_long.c
-OBJ := $(SRC:.c=.o)
+SRC = so_long.c
+OBJ = $(SRC:.c=.o)
 
-CC := cc #-g3 -fsanitize=address
+CC = cc #-g3 -fsanitize=address
 
-CFLAGS := -Wall -Wextra -Werror
+LiBFT = libft.a
+LIBPRINTF = libftprintf.a
+LIBFTDIR = libft
+FT_PRINTFDIR = ft_printf
+CFLAGS = -Wall -Wextra -Werror   # Include path for mlx.h
 
-LIBXFLAGS := -lmlx -lXext -lX11
+MLXFLAGS = -L/usr/lib -lmlx -lXext -lX11
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	make -C ft_printf/
-	make -C libft/
-	$(CC) $(OBJ) $(LIBXFLAGS) ft_printf/libftprintf.a libft/libft.a -o $(NAME)
+$(LiBFT):
+	make -C $(LIBFTDIR)
+$(LIBPRINTF):
+	make -C $(FT_PRINTFDIR)
+
+$(NAME): $(LiBFT) $(OBJ)
+	$(CC) $(OBJ) $(MLXFLAGS) -L$(LIBFTDIR) -lft -I$(LIBFTDIR) -o $(NAME) 
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make -C ft_printf fclean
-	make -C libft fclean
+	make -C $(LIBFTDIR) fclean
 	rm -f $(OBJ)
 
 fclean: clean
@@ -29,3 +35,4 @@ fclean: clean
 
 re: fclean all
 
+.PHONY: all clean fclean re
