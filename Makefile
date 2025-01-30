@@ -1,38 +1,37 @@
+
 NAME = so_long
 
-SRC = so_long.c
+# Sources and objects
+SRC = so_long.c map/read_map.c map/render_map.c
 OBJ = $(SRC:.c=.o)
 
-CC = cc #-g3 -fsanitize=address
+# Compiler settings
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I.  # Include current directory
 
-LiBFT = libft.a
-LIBPRINTF = libftprintf.a
-LIBFTDIR = libft
-FT_PRINTFDIR = ft_printf
-CFLAGS = -Wall -Wextra -Werror   # Include path for mlx.h
+# MLX libraries
+MLXFLAGS = -lmlx -lXext -lX11
 
-MLXFLAGS = -L/usr/lib -lmlx -lXext -lX11
-
+# Build the final executable
 all: $(NAME)
 
-$(LiBFT):
-	make -C $(LIBFTDIR)
-$(LIBPRINTF):
-	make -C $(FT_PRINTFDIR)
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) $(MLXFLAGS) -o $(NAME)  # Linking with object files
 
-$(NAME): $(LiBFT) $(OBJ)
-	$(CC) $(OBJ) $(MLXFLAGS) -L$(LIBFTDIR) -lft -I$(LIBFTDIR) -o $(NAME) 
-
+# Rule to compile .c files into .o files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Clean object files
 clean:
-	make -C $(LIBFTDIR) fclean
 	rm -f $(OBJ)
 
+# Clean object files and executable
 fclean: clean
 	rm -f $(NAME)
 
+# Rebuild everything
 re: fclean all
 
 .PHONY: all clean fclean re
+
