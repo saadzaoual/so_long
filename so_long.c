@@ -12,6 +12,9 @@ typedef struct s_game
     int player_x;
     int player_y;
     void *textures[3];
+    void *player_textures[8];
+    int current_frame;
+    int frame_delay;
 } t_game;
 
 int handle_key_press(int keycode, void *param)
@@ -46,6 +49,30 @@ int handle_key_press(int keycode, void *param)
         mlx_put_image_to_window(game->mlx, game->window, game->textures[0], game->player_x * TITLE_SIZE, game->player_y * TITLE_SIZE);
     }
     //correct moves error;
+    return (0);
+}
+int animate_player(void *param)
+{
+    t_game *game = (t_game *)param;
+
+    // Increase the delay counter
+    game->frame_delay++;
+
+    // Only update animation every 5 loops
+    if (game->frame_delay % 10000 == 0) 
+    { // Reset counter
+        // Erase previous position
+        mlx_put_image_to_window(game->mlx, game->window, game->textures[2], 
+                                game->player_x * TITLE_SIZE, game->player_y * TITLE_SIZE);
+
+        // Cycle through frames
+        game->current_frame = (game->current_frame + 1) % 8;
+
+        // Draw the new frame
+        mlx_put_image_to_window(game->mlx, game->window, game->player_textures[game->current_frame], 
+                                game->player_x * TITLE_SIZE, game->player_y * TITLE_SIZE);
+    }
+
     return (0);
 }
 int main(int ac, char **av)
@@ -83,6 +110,17 @@ int main(int ac, char **av)
     game.textures[0] = mlx_xpm_file_to_image(game.mlx, "assets/cj.xpm", &img_width, &img_height);
     game.textures[1] = mlx_xpm_file_to_image(game.mlx, "assets/wall.xpm", &img_width, &img_height);
     game.textures[2] = mlx_xpm_file_to_image(game.mlx, "assets/empty.xpm",&img_width, &img_height);
+    
+    game.player_textures[0] = mlx_xpm_file_to_image(game.mlx, "assets/cjframes/cj0.xpm", &img_width, &img_height);
+    game.player_textures[1] = mlx_xpm_file_to_image(game.mlx, "assets/cjframes/cj1.xpm", &img_width, &img_height);
+    game.player_textures[2] = mlx_xpm_file_to_image(game.mlx, "assets/cjframes/cj2.xpm", &img_width, &img_height);
+    game.player_textures[3] = mlx_xpm_file_to_image(game.mlx, "assets/cjframes/cj3.xpm", &img_width, &img_height);
+    game.player_textures[4] = mlx_xpm_file_to_image(game.mlx, "assets/cjframes/cj4.xpm", &img_width, &img_height);
+    game.player_textures[5] = mlx_xpm_file_to_image(game.mlx, "assets/cjframes/cj5.xpm", &img_width, &img_height);
+    game.player_textures[6] = mlx_xpm_file_to_image(game.mlx, "assets/cjframes/cj6.xpm", &img_width, &img_height);
+    game.player_textures[7] = mlx_xpm_file_to_image(game.mlx, "assets/cjframes/cj7.xpm", &img_width, &img_height);
+    game.current_frame = 0;
+  
     y = 0;
     while (y < map_height)
     {
@@ -100,6 +138,7 @@ int main(int ac, char **av)
     }
     render_map(game.mlx, game.window, game.map, game.textures);
     mlx_key_hook(game.window, (int (*)(int, void *))handle_key_press, &game);
+    mlx_loop_hook(game.mlx, animate_player, &game);
     mlx_loop(game.mlx);
     free_map(game.map);
 
