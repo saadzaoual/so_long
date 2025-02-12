@@ -1,64 +1,39 @@
-#include "../so_long.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/11 16:09:03 by szaoual           #+#    #+#             */
+/*   Updated: 2025/02/11 16:10:01 by szaoual          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
-char **read_map(const char *filename)
+char	**read_map(const char *filename)
 {
-    FILE *file = fopen(filename, "r");
-    if (!file)
-    {
-        perror("Error opening file");
-        return NULL;
-    }
+	int		fd;
+	char	*line;
+	char	**map;
+	int		i;
 
-    char **map = NULL;
-    char *line = NULL;
-    size_t len = 0;
-    ssize_t read;
-    int row_count = 0;
-
-    // First pass: count the number of rows
-    while ((read = getline(&line, &len, file)) != -1)
-    {
-        row_count++;
-    }
-
-    // Allocate memory for the map (row_count + 1 for the NULL terminator)
-    map = (char **)malloc((row_count + 1) * sizeof(char *));
-    if (!map)
-    {
-        perror("Memory allocation failed");
-        fclose(file);
-        return NULL;
-    }
-
-    // Reset the file pointer to the beginning
-    fseek(file, 0, SEEK_SET);
-
-    // Second pass: read the map and store it in the map array
-    int row = 0;
-    while ((read = getline(&line, &len, file)) != -1)
-    {
-        map[row] = (char *)malloc((read + 1) * sizeof(char)); // +1 for the null terminator
-        if (!map[row])
-        {
-            perror("Memory allocation failed");
-            fclose(file);
-            return NULL;
-        }
-        // Remove the newline character from the end of the line
-        line[read - 1] = '\0';
-        // Copy the line into the map
-        strcpy(map[row], line);
-        row++;
-    }
-
-    map[row] = NULL; // Null-terminate the map
-
-    fclose(file);
-    free(line); // Free the buffer used by getline
-
-    return map;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening file"), NULL);
+	map = malloc(sizeof(char *) * 1000);
+	if (!map)
+		return (close(fd), NULL);
+	i = 0;
+	while ((line = get_next_line(fd)))
+		map[i++] = line;
+	map[i] = NULL;
+	close(fd);
+	return (map);
 }
 
 void free_map(char **map)
@@ -71,4 +46,3 @@ void free_map(char **map)
     }
     free(map);
 }
-

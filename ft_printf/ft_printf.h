@@ -1,17 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: szaoual <szaoual@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 16:30:34 by szaoual           #+#    #+#             */
-/*   Updated: 2024/11/09 16:57:04 by szaoual          ###   ########.fr       */
+/*   Created: 2024/11/21 13:51:19 by szaoual           #+#    #+#             */
+/*   Updated: 2024/11/21 16:13:02 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-int	ft_isprint(int c)
-{
-	return (c >= 32 && c <= 126);
-}
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
+# include <stdarg.h>
+# include <unistd.h>
+
+int	ft_printf(const char *format, ...);
+int	ft_puthexa(unsigned long n, char x);
+int	ft_putunbr(unsigned int n);
+int	ft_putstr(char *s);
+int	ft_putchar(char c);
+int	ft_putnbr(int n);
+#endif

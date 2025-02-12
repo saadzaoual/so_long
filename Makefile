@@ -1,32 +1,26 @@
 
 NAME = so_long
 
-# Sources and objects
-SRC = so_long.c map/read_map.c map/render_map.c
+SRC = so_long.c map/read_map.c map/render_map.c ft_printf/ft_printf.c  ft_printf/ft_printf_functions.c \
+			get_next_line.c get_next_line_utils.c handle_key_press.c
 OBJ = $(SRC:.c=.o)
 
-# Compiler settings
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I.  # Include current directory
 
-# MLX libraries
 MLXFLAGS = -lmlx -lXext -lX11
 
-# Build the final executable
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(MLXFLAGS) -o $(NAME)  # Linking with object files
 
-# Rule to compile .c files into .o files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean object files
 clean:
 	rm -f $(OBJ)
 
-# Clean object files and executable
 fclean: clean
 	rm -f $(NAME)
 
