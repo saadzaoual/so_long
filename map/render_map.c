@@ -19,7 +19,6 @@ void	render_map(void *mlx, void *window, char **map, void **textures)
 	int	y;
   int img_width;
   int img_height;
-
 	y = 0;
 	while (map[y] != NULL)
 	{
@@ -37,6 +36,12 @@ void	render_map(void *mlx, void *window, char **map, void **textures)
 			else if (map[y][x] == EMPTY)
 				mlx_put_image_to_window(mlx, window,
 					textures[2], x * img_width, y * img_height);
+      else if(map[y][x] == MONEY)
+        mlx_put_image_to_window(mlx,window,
+          textures[3],x * img_width, y * img_height);
+      else if(map[y][x] == EXIT)
+        mlx_put_image_to_window(mlx,window,
+          textures[4],x *img_width, y * img_height);
 			x++;
 		}
 		y++;

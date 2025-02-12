@@ -19,6 +19,8 @@
 # define PLAYER 'P'
 # define WALL '1'
 # define EMPTY '0'
+# define MONEY 'C'
+# define EXIT 'X'
 # define UP_KEY 119
 # define DOWN_KEY 115
 # define RIGHT_KEY 100
@@ -41,9 +43,11 @@ typedef struct s_game
 	char	**map;
 	int		player_x;
 	int		player_y;
-	void	*textures[3];
+	void	*textures[5];
 	int		map_height;
 	int		map_width;
+  int   collectibles_collected;
+  int   collectibles_total;
 }	t_game;
 
 int		is_key(int keycode);
