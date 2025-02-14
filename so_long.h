@@ -49,7 +49,7 @@ typedef struct s_game
   int   collectibles_collected;
   int   collectibles_total;
 }	t_game;
-
+void cleanup_game(t_game *game);
 int		is_key(int keycode);
 int		handle_key_press(int keycode, void *param);
 char	*get_next_line(int fd);
