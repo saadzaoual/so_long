@@ -61,12 +61,12 @@ void load_textures(t_game *game)
         cleanup_game(game);
     }
 
-    game->textures[0] = mlx_xpm_file_to_image(game->mlx, "assets/cj.xpm",
+    game->textures[0] = mlx_xpm_file_to_image(game->mlx, "textures/cj.xpm",
                                               &img_width, &img_height);
     if (!game->textures[0])
         cleanup_game(game);
 
-    game->textures[1] = mlx_xpm_file_to_image(game->mlx, "assets/wall.xpm",
+    game->textures[1] = mlx_xpm_file_to_image(game->mlx, "textures/wall.xpm",
                                               &img_width, &img_height);
     if (!game->textures[1])
     {
@@ -74,7 +74,7 @@ void load_textures(t_game *game)
         cleanup_game(game);
     }
 
-    game->textures[2] = mlx_xpm_file_to_image(game->mlx, "assets/empty.xpm",
+    game->textures[2] = mlx_xpm_file_to_image(game->mlx, "textures/empty.xpm",
                                               &img_width, &img_height);
     if (!game->textures[2])
     {
@@ -82,7 +82,7 @@ void load_textures(t_game *game)
         cleanup_game(game);
     }
 
-    game->textures[3] = mlx_xpm_file_to_image(game->mlx, "assets/money6.xpm",
+    game->textures[3] = mlx_xpm_file_to_image(game->mlx, "textures/money6.xpm",
                                               &img_width, &img_height);
     if (!game->textures[3])
     {
@@ -90,7 +90,7 @@ void load_textures(t_game *game)
         cleanup_game(game);
     }
 
-    game->textures[4] = mlx_xpm_file_to_image(game->mlx, "assets/car.xpm",
+    game->textures[4] = mlx_xpm_file_to_image(game->mlx, "textures/car.xpm",
                                               &img_width, &img_height);
     if (!game->textures[4])
     {
@@ -173,7 +173,8 @@ int main(int ac, char **av)
         return (1);
     }
 
-    game.map_width = strlen(game.map[0]) - 1;
+    game.map_width = ft_strlen(game.map[0]) - 1;
+    /*TODO: if (game.map_width < 0)*/
     game.map_height = 0;
     while (game.map[game.map_height])
         game.map_height++;

@@ -36,6 +36,8 @@
 # include <stdio.h>
 # include "./ft_printf/ft_printf.h"
 
+#include "libft/libft.h"
+
 typedef struct s_game
 {
 	void	*mlx;
@@ -54,7 +56,6 @@ int		is_key(int keycode);
 int		handle_key_press(int keycode, void *param);
 char	*get_next_line(int fd);
 char	*ft_extract_line(char **str);
-int		ft_strlen(const char *str);
 char	**read_map(const char *file_name);
 void	render_map(void *mlx, void *window, char **map, void **textures);
 void	free_map(char **map);

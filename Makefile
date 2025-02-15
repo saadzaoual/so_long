@@ -5,27 +5,34 @@ SRC = so_long.c map/read_map.c map/render_map.c ft_printf/ft_printf.c  ft_printf
 
 OBJ = $(SRC:.c=.o)
 
-CC = cc
+CC = cc -fsanitize=address -g3
+# CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -I.
 
 MLXFLAGS = -lmlx -lXext -lX11
 
+LIBFT = libft/libft.a
+
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) $(MLXFLAGS) -o $(NAME)
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(OBJ) $(LIBFT) $(MLXFLAGS) -o $(NAME)
+
+$(LIBFT): FORCE
+	@make -C libft --no-print-directory
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
+	@make clean -C libft --no-print-directory
 
 fclean: clean
 	rm -f $(NAME)
+	@make fclean -C libft --no-print-directory
 
 re: fclean all
 
-.PHONY: all clean fclean re
-
+.PHONY: all clean fclean re FORCE

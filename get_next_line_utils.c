@@ -12,19 +12,19 @@
 
 #include "so_long.h"
 
-int	ft_strlen(const char *str)
-{
-	int	i;
+/*int	ft_strlen_(const char *str)*/
+/*{*/
+/*	int	i;*/
+/**/
+/*	i = 0;*/
+/*	if (!str)*/
+/*		return (-1);*/
+/*	while (str[i])*/
+/*		i++;*/
+/*	return (i);*/
+/*}*/
 
-	i = 1;
-	if (!str)
-		return (-1);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-static char	*ft_strlcpy(char *dest, char *src, int len)
+static char	*ft_strlcpy_(char *dest, char *src, int len)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ static char	*ft_strlcpy(char *dest, char *src, int len)
 	return (dest);
 }
 
-static char	*ft_strdup(char *str)
+static char	*ft_strdup_(char *str)
 {
 	int		i;
 	char	*res;
@@ -70,7 +70,7 @@ void	ft_update_remaining_str(char **str, int i)
 		*str = NULL;
 		return ;
 	}
-	temp = ft_strdup(&(*str)[i]);
+	temp = ft_strdup_(&(*str)[i]);
 	if (!temp)
 	{
 		free(*str);
@@ -100,7 +100,7 @@ char	*ft_extract_line(char **str)
 		*str = NULL;
 		return (NULL);
 	}
-	ft_strlcpy(line, *str, i + 1);
+	ft_strlcpy_(line, *str, i + 1);
 	ft_update_remaining_str(str, i);
 	return (line);
 }

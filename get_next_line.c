@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static char	*ft_strchr(char *str, char c)
+static char	*ft_strchr_(char *str, char c)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ static char	*ft_strchr(char *str, char c)
 	return (0);
 }
 
-static char	*ft_strjoin(char *s1, char *s2)
+static char	*ft_strjoin_(char *s1, char *s2)
 {
 	int		len1;
 	int		len2;
@@ -66,7 +66,7 @@ static char	*ft_read_to_str_left(int fd, char *str_left)
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (free(str_left), NULL);
-	while (!ft_strchr(str_left, '\n'))
+	while (!ft_strchr_(str_left, '\n'))
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (read_bytes < 0)
@@ -74,7 +74,7 @@ static char	*ft_read_to_str_left(int fd, char *str_left)
 		if (read_bytes == 0)
 			break ;
 		buffer[read_bytes] = '\0';
-		tmp = ft_strjoin(str_left, buffer);
+		tmp = ft_strjoin_(str_left, buffer);
 		if (!tmp)
 			return (free(str_left), free(buffer), NULL);
 		free(str_left);
