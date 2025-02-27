@@ -40,7 +40,7 @@ int handle_key_press(int keycode, void *param)
         default:        return (0);
     }
 
-    if (game->map[new_y][new_x] == '1')
+    if (game->map[new_y][new_x] == WALL)
         return (0);
 
     if (is_key(keycode))
@@ -48,13 +48,13 @@ int handle_key_press(int keycode, void *param)
         moves++;
         printf("Moves: %d\n", moves);
 
-        if (game->map[new_y][new_x] == 'C')
+        if (game->map[new_y][new_x] == MONEY)
         {
             game->collectibles_collected++;
-            game->map[new_y][new_x] = '0';
+            game->map[new_y][new_x] = EMPTY;
         }
 
-        if (game->map[new_y][new_x] == 'X')
+        if (game->map[new_y][new_x] == EXIT)
         {
             if (game->collectibles_collected == game->collectibles_total)
             {
@@ -80,3 +80,45 @@ int handle_key_press(int keycode, void *param)
     return (0);
 }
 
+void move_player(t_game *game)
+{
+    int x, y;
+
+    y = 0;
+    while (game->map[y])
+    {
+        x = 0;
+        while (game->map[y][x])
+        {
+            if (game->map[y][x] == PLAYER)
+            {
+                game->player_x = x;
+                game->player_y = y;
+                return;
+            }
+            x++;
+        }
+        y++;
+    }
+}
+
+void count_collectibles(t_game *game)
+{
+    int x, y;
+
+    game->collectibles_total = 0;
+    game->collectibles_collected = 0;
+    y = 0;
+    while (game->map[y])
+    {
+        x = 0;
+        while (game->map[y][x])
+        {
+            if (game->map[y][x] == MONEY)
+                game->collectibles_total++;
+            x++;
+        }
+        y++;
+    }
+    printf("Total collectibles: %d\n", game->collectibles_total);
+}

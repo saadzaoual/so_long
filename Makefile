@@ -1,12 +1,11 @@
 NAME = so_long
 
-SRC = so_long.c map/read_map.c map/render_map.c ft_printf/ft_printf.c  ft_printf/ft_printf_functions.c \
-			get_next_line.c get_next_line_utils.c handle_key_press.c
+SRC = so_long.c read_map.c render_map.c ft_printf/ft_printf.c  ft_printf/ft_printf_functions.c \
+			get_next_line.c get_next_line_utils.c handle_key_press.c load_textures.c validate_map.c
 
 OBJ = $(SRC:.c=.o)
 
-CC = cc -fsanitize=address -g3
-# CC = cc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -I.
 

@@ -20,7 +20,7 @@
 # define WALL '1'
 # define EMPTY '0'
 # define MONEY 'C'
-# define EXIT 'X'
+# define EXIT 'E'
 # define UP_KEY 119
 # define DOWN_KEY 115
 # define RIGHT_KEY 100
@@ -35,7 +35,6 @@
 # include <string.h>
 # include <stdio.h>
 # include "./ft_printf/ft_printf.h"
-
 #include "libft/libft.h"
 
 typedef struct s_game
@@ -59,4 +58,11 @@ char	*ft_extract_line(char **str);
 char	**read_map(const char *file_name);
 void	render_map(void *mlx, void *window, char **map, void **textures);
 void	free_map(char **map);
+void load_textures(t_game *game);
+void free_textures(t_game *game);
+void move_player(t_game *game);
+int handle_close(t_game *game);
+void count_collectibles(t_game *game);
+int validate_map_contents(char **map);
+int    ft_check_border(char **map, int width, int height);
 #endif

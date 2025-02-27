@@ -19,6 +19,7 @@ void	render_map(void *mlx, void *window, char **map, void **textures)
 	int	y;
   int img_width;
   int img_height;
+
 	y = 0;
 	while (map[y] != NULL)
 	{
