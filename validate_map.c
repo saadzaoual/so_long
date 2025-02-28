@@ -65,7 +65,7 @@ int ft_check_border(char **map, int width, int height)
             {
                 if (map[y][x] != '1')
                 {
-                    ft_putstr_fd("Error: Map is not surrounded by walls\n", 2);
+                    //ft_putstr_fd("Error: Map is not surrounded by walls\n", 2);
                     return (0);
                 }
             }
@@ -74,7 +74,7 @@ int ft_check_border(char **map, int width, int height)
             {
                 if (map[y][x] != '1')
                 {
-                    ft_putstr_fd("Error: Map is not surrounded by walls\n", 2);
+                    //ft_putstr_fd("Error: Map is not surrounded by walls\n", 2);
                     return (0);
                 }
             }

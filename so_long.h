@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szaoual <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:51:37 by szaoual           #+#    #+#             */
-/*   Updated: 2025/02/12 16:03:41 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/02/28 23:19:32 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define MAX_HEIGHT 100
 # define BUFFER_SIZE 1
 
-# include <mlx.h>
+# include "./minilibx-linux/mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -65,4 +65,6 @@ int handle_close(t_game *game);
 void count_collectibles(t_game *game);
 int validate_map_contents(char **map);
 int    ft_check_border(char **map, int width, int height);
+void cleanup_game2(t_game *game);
+int is_valid_path(char **map);
 #endif

@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:10:16 by szaoual           #+#    #+#             */
-/*   Updated: 2025/02/27 12:10:21 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/02/28 23:19:24 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,19 @@ int handle_close(t_game *game)
 {
     cleanup_game(game);
     return (0);
+}
+void cleanup_game2(t_game *game)
+{
+    if (game)
+    {
+        if (game->map)
+            free_map(game->map);
+            
+        if (game->mlx)
+        {
+           mlx_destroy_display(game->mlx);
+           free(game->mlx);
+        }
+    }
+    exit(0);
 }
