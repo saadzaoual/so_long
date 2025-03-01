@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:08:01 by szaoual           #+#    #+#             */
-/*   Updated: 2025/02/28 23:45:16 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/01 00:11:27 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,14 @@ int has_valid_ber_extension(char *filename)
 int main(int ac, char **av)
 {
     t_game game;
+    int screen_width, screen_height;
 
     if (ac != 2)
         return (ft_printf("Error: Invalid arguments!\nUsage: ./so_long <map.ber>\n"), 1);
 
     if (!has_valid_ber_extension(av[1]))
         return (ft_printf("Error: Map file must have a '.ber' extension!\n"), 1);
+
     game.mlx = mlx_init();
     if (!game.mlx)
         return (ft_printf("Error: Failed to initialize MLX\n"), 1);
@@ -60,29 +62,51 @@ int main(int ac, char **av)
 
     if (validate_map_contents(game.map))
         return (1);
+
     game.map_width = ft_strlen(game.map[0]) - 1;
     game.map_height = 0;
     while (game.map[game.map_height])
         game.map_height++;
+
     if (game.map_width <= 0 || game.map_height <= 0)
         return (ft_printf("Error: Invalid map dimensions!\n"), cleanup_game2(&game), 1);
-        
-    if(!ft_check_border(game.map,game.map_width, game.map_height))
-    return (ft_printf("Error: invalid borders ;)\n"), cleanup_game2(&game), 1);
-    
+
+    if (!ft_check_border(game.map, game.map_width, game.map_height))
+        return (ft_printf("Error: invalid borders ;)\n"), cleanup_game2(&game), 1);
+
     if (game.map_width > 1920 / TITLE_SIZE || game.map_height > 1080 / TITLE_SIZE)
-        return (ft_printf("Error: Map size exceeds limit!\nWidth: %d | Height: %d\n", 
+        return (ft_printf("Error: Map size exceeds limit!\nWidth: %d | Height: %d\n",
                           game.map_width, game.map_height), cleanup_game2(&game), 1);
+
     if (!is_valid_path(game.map))
         return (cleanup_game2(&game), 1);
 
+    // Get the screen resolution
+    mlx_get_screen_size(game.mlx, &screen_width, &screen_height);
+
+    // Calculate the optimal window size based on the screen resolution
+    int window_width = game.map_width * TITLE_SIZE;
+    int window_height = game.map_height * TITLE_SIZE;
+
+    // Scale the window to fit the screen size (keep the map's aspect ratio intact)
+    if (window_width > screen_width)
+        window_width = screen_width;
+    if (window_height > screen_height)
+        window_height = screen_height;
+
+    // Create the window with the calculated size
+    game.window = mlx_new_window(game.mlx, window_width, window_height, "so_long");
+
+    // Load textures, initialize game, and start the game loop
     load_textures(&game);
     count_collectibles(&game);
     move_player(&game);
     render_map(game.mlx, game.window, game.map, game.textures);
+
     mlx_hook(game.window, 17, 0, handle_close, &game);
     mlx_key_hook(game.window, handle_key_press, &game);
     mlx_loop(game.mlx);
+
     cleanup_game(&game);
     return (0);
 }
