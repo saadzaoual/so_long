@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:05:39 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/01 22:22:37 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/01 22:54:05 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int handle_key_press(int keycode, void *param)
         {
             game->collectibles_collected++;
             game->map[new_y][new_x] = EMPTY;
-            render_map(game, game->mlx, game->window, game->map, game->textures); // Re-render map
         }
 
         if (game->map[new_y][new_x] == EXIT)
@@ -77,6 +76,15 @@ int handle_key_press(int keycode, void *param)
 
         mlx_put_image_to_window(game->mlx, game->window, game->textures[0],
                                 game->player_x * TITLE_SIZE, game->player_y * TITLE_SIZE);
+
+        // Render the exit if all collectibles are collected
+        if (game->collectibles_collected == game->collectibles_total)
+        {
+            int exit_x = game->exit_x;
+            int exit_y = game->exit_y;
+            mlx_put_image_to_window(game->mlx, game->window, game->textures[4],
+                                    exit_x * TITLE_SIZE, exit_y * TITLE_SIZE);
+        }
     }
     return (0);
 }

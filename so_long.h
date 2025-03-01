@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:51:37 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/01 22:22:57 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/01 22:54:28 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_game
 	int		map_width;
   int   collectibles_collected;
   int   collectibles_total;
+  int   exit_x;
+  int   exit_y;
 }	t_game;
 void cleanup_game(t_game *game);
 int		is_key(int keycode);

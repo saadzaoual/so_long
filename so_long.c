@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:08:01 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/01 22:22:36 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/01 22:54:41 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,27 @@ int main(int ac, char **av)
     if (!is_valid_path(game.map))
         return (cleanup_game2(&game), 1);
 
+    game.exit_x = -1;
+    game.exit_y = -1;
+
     load_textures(&game);
     count_collectibles(&game);
     move_player(&game);
+
+    // Set exit coordinates
+    for (int y = 0; y < game.map_height; y++)
+    {
+        for (int x = 0; x < game.map_width; x++)
+        {
+            if (game.map[y][x] == EXIT)
+            {
+                game.exit_x = x;
+                game.exit_y = y;
+                break;
+            }
+        }
+    }
+
     render_map(&game, game.mlx, game.window, game.map, game.textures);
     mlx_hook(game.window, 17, 0, handle_close, &game);
     mlx_key_hook(game.window, handle_key_press, &game);
