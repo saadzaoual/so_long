@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:05:39 by szaoual           #+#    #+#             */
-/*   Updated: 2025/02/12 15:07:14 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/01 22:22:37 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int handle_key_press(int keycode, void *param)
         {
             game->collectibles_collected++;
             game->map[new_y][new_x] = EMPTY;
+            render_map(game, game->mlx, game->window, game->map, game->textures); // Re-render map
         }
 
         if (game->map[new_y][new_x] == EXIT)

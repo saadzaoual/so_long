@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:51:37 by szaoual           #+#    #+#             */
-/*   Updated: 2025/02/28 23:19:32 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/01 22:22:57 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		handle_key_press(int keycode, void *param);
 char	*get_next_line(int fd);
 char	*ft_extract_line(char **str);
 char	**read_map(const char *file_name);
-void	render_map(void *mlx, void *window, char **map, void **textures);
+void	render_map(t_game *game, void *mlx, void *window, char **map, void **textures);
 void	free_map(char **map);
 void load_textures(t_game *game);
 void free_textures(t_game *game);
