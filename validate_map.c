@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 13:49:40 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 03:04:45 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/02 17:06:25 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,31 @@ void	count_map_elements(char **map, int *player_count, int *exit_count,
 	}
 }
 
+int	check_invalid_chars(char **map)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	while (map[row] != NULL)
+	{
+		col = 0;
+		while (map[row][col] != '\0')
+		{
+			if (map[row][col] != 'P' && map[row][col] != 'E' &&
+				map[row][col] != 'C' && map[row][col] != '1' &&
+				map[row][col] != '0' && map[row][col] != '\n')
+			{
+				ft_printf("Error: Invalid character '%c' in map\n", map[row][col]);
+				return (1);
+			}
+			col++;
+		}
+		row++;
+	}
+	return (0);
+}
+
 int	validate_map_contents(char **map)
 {
 	int	player_count;
@@ -45,6 +70,8 @@ int	validate_map_contents(char **map)
 	player_count = 0;
 	exit_count = 0;
 	collectible_count = 0;
+	if (check_invalid_chars(map))
+		return (1);
 	count_map_elements(map, &player_count, &exit_count, &collectible_count);
 	if (player_count != 1 || exit_count != 1 || collectible_count < 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:08:01 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 02:56:43 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/02 17:07:22 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ void	initialize_game(t_game *game, char *map_file)
 		exit(1);
 	}
 	if (validate_map_contents(game->map))
+	{
+		cleanup_game2(game);
 		exit(1);
+	}
 	check_map_dimensions(game);
 	check_map_borders(game);
 	check_map_size(game);
