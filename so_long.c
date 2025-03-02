@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:08:01 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 02:33:45 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/02 02:55:19 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(int ac, char **av)
 	load_textures(&game);
 	count_collectibles(&game);
 	move_player(&game);
-	render_map(&game, game.mlx, game.window, game.map, game.textures);
+	render_map(&game);
 	mlx_hook(game.window, 17, 0, handle_close, &game);
 	mlx_key_hook(game.window, handle_key_press, &game);
 	mlx_loop(game.mlx);
