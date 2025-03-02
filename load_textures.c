@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:10:16 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 16:58:03 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/02 17:38:23 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,19 @@ void	load_texture(t_game *game, char *path, int index)
 		(game->mlx, path, &img_width, &img_height);
 	if (!game->textures[index])
 	{
+		ft_printf("Error to load the textures\n");
 		free_textures(game);
 		cleanup_game(game);
 	}
+}
+
+void init_null(t_game *game)
+{
+	game->textures[0] = NULL;
+	game->textures[1] = NULL;
+	game->textures[2] = NULL;
+	game->textures[3] = NULL;
+	game->textures[4] = NULL;
 }
 
 void	load_textures(t_game *game)
@@ -37,6 +47,7 @@ void	load_textures(t_game *game)
 		ft_printf("Error: Failed to create window\n");
 		cleanup_game(game);
 	}
+	init_null(game);
 	load_texture(game, "textures/cj.xpm", 0);
 	load_texture(game, "textures/wall.xpm", 1);
 	load_texture(game, "textures/empty.xpm", 2);

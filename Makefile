@@ -8,7 +8,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I.
+CFLAGS = -Wall -Wextra -Werror -I. -g3
 
 MLX_DIR = minilibx-linux
 MLX = $(MLX_DIR)/libmlx.a
