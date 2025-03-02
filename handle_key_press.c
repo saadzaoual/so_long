@@ -6,124 +6,93 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:05:39 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/01 23:22:15 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/02 02:41:19 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int is_key(int keycode)
+void	update_player_position(t_game *game, int new_x, int new_y)
 {
-    return (keycode == UP_KEY || keycode == DOWN_KEY ||
-            keycode == LEFT_KEY || keycode == RIGHT_KEY);
+	mlx_put_image_to_window(game->mlx, game->window, game->textures[2],
+		game->player_x * TITLE_SIZE, game->player_y * TITLE_SIZE);
+	game->player_x = new_x;
+	game->player_y = new_y;
+	mlx_put_image_to_window(game->mlx, game->window, game->textures[0],
+		game->player_x * TITLE_SIZE, game->player_y * TITLE_SIZE);
+	if (game->collectibles_collected == game->collectibles_total)
+	{
+		mlx_put_image_to_window(game->mlx, game->window, game->textures[4],
+			game->exit_x * TITLE_SIZE, game->exit_y * TITLE_SIZE);
+	}
 }
 
-int handle_key_press(int keycode, void *param)
+void	handle_collectibles_and_exit(t_game *game, int new_x, int new_y)
 {
-    t_game *game = (t_game *)param;
-    int new_x = game->player_x;
-    int new_y = game->player_y;
-    static int moves = 0;
-
-    if (keycode == ESC_KEY || keycode == Q_KEY)
-    {
-        ft_printf("You quitted the game!\n");
-        cleanup_game(game);
-    }
-
-    switch (keycode)
-    {
-        case UP_KEY:    new_y--; break;
-        case DOWN_KEY:  new_y++; break;
-        case LEFT_KEY:  new_x--; break;
-        case RIGHT_KEY: new_x++; break;
-        default:        return (0);
-    }
-
-    if (game->map[new_y][new_x] == WALL)
-        return (0);
-
-    if (is_key(keycode))
-    {
-        moves++;
-        ft_printf("Moves: %d\n", moves);
-
-        if (game->map[new_y][new_x] == MONEY)
-        {
-            game->collectibles_collected++;
-            game->map[new_y][new_x] = EMPTY;
-        }
-
-        if (game->map[new_y][new_x] == EXIT && game->collectibles_collected == game->collectibles_total)
-        {
-            ft_printf("You collected all money! Game over.\n");
-            cleanup_game(game);
-        }
-        else if (game->map[new_y][new_x] == EXIT)
-        {
-            ft_printf("Collect all money first!\n");
-        }
-
-        mlx_put_image_to_window(game->mlx, game->window, game->textures[2],
-                                game->player_x * TITLE_SIZE, game->player_y * TITLE_SIZE);
-
-        game->player_x = new_x;
-        game->player_y = new_y;
-
-        mlx_put_image_to_window(game->mlx, game->window, game->textures[0],
-                                game->player_x * TITLE_SIZE, game->player_y * TITLE_SIZE);
-
-        // Render the exit if all collectibles are collected
-        if (game->collectibles_collected == game->collectibles_total)
-        {
-            int exit_x = game->exit_x;
-            int exit_y = game->exit_y;
-            mlx_put_image_to_window(game->mlx, game->window, game->textures[4],
-                                    exit_x * TITLE_SIZE, exit_y * TITLE_SIZE);
-        }
-    }
-    return (0);
+	if (game->map[new_y][new_x] == MONEY)
+	{
+		game->collectibles_collected++;
+		game->map[new_y][new_x] = EMPTY;
+	}
+	if (game->map[new_y][new_x] == EXIT
+		&& game->collectibles_collected == game->collectibles_total)
+	{
+		ft_printf("You collected all money! Game over.\n");
+		cleanup_game(game);
+	}
+	else if (game->map[new_y][new_x] == EXIT)
+	{
+		ft_printf("Collect all money first!\n");
+	}
 }
 
-void move_player(t_game *game)
+int	handle_key_press(int keycode, void *param)
 {
-    int x = 0;
-    int y = 0;
+	t_game		*game;
+	int			new_x;
+	int			new_y;
+	static int	moves = 0;
 
-    while (game->map[y])
-    {
-        x = 0;
-        while (game->map[y][x])
-        {
-            if (game->map[y][x] == PLAYER)
-            {
-                game->player_x = x;
-                game->player_y = y;
-                return;
-            }
-            x++;
-        }
-        y++;
-    }
+	game = (t_game *)param;
+	new_x = game->player_x;
+	new_y = game->player_y;
+	if (keycode == ESC_KEY || keycode == Q_KEY)
+	{
+		ft_printf("You quitted the game!\n");
+		cleanup_game(game);
+	}
+	handle_key_movement(keycode, &new_x, &new_y);
+	if (game->map[new_y][new_x] == WALL)
+		return (0);
+	if (is_key(keycode))
+	{
+		moves++;
+		ft_printf("Moves: %d\n", moves);
+		handle_collectibles_and_exit(game, new_x, new_y);
+		update_player_position(game, new_x, new_y);
+	}
+	return (0);
 }
 
-void count_collectibles(t_game *game)
+void	move_player(t_game *game)
 {
-    int x = 0;
-    int y = 0;
+	int	x;
+	int	y;
 
-    game->collectibles_total = 0;
-    game->collectibles_collected = 0;
-    while (game->map[y])
-    {
-        x = 0;
-        while (game->map[y][x])
-        {
-            if (game->map[y][x] == MONEY)
-                game->collectibles_total++;
-            x++;
-        }
-        y++;
-    }
-    ft_printf("Total collectibles: %d\n", game->collectibles_total);
+	y = 0;
+	while (game->map[y])
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == PLAYER)
+			{
+				game->player_x = x;
+				game->player_y = y;
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
 }
