@@ -6,17 +6,27 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:10:16 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/01 23:21:13 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/02 02:29:13 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void load_textures(t_game *game)
+void load_texture(t_game *game, char *path, int index)
 {
     int img_width = 128;
     int img_height = 128;
 
+    game->textures[index] = mlx_xpm_file_to_image(game->mlx, path, &img_width, &img_height);
+    if (!game->textures[index])
+    {
+        free_textures(game);
+        cleanup_game(game);
+    }
+}
+
+void load_textures(t_game *game)
+{
     game->window = mlx_new_window(game->mlx, game->map_width * TITLE_SIZE,
                                   game->map_height * TITLE_SIZE, "so_long");
     if (!game->window)
@@ -25,42 +35,11 @@ void load_textures(t_game *game)
         cleanup_game(game);
     }
 
-    game->textures[0] = mlx_xpm_file_to_image(game->mlx, "textures/cj.xpm",
-                                              &img_width, &img_height);
-    if (!game->textures[0])
-        cleanup_game(game);
-
-    game->textures[1] = mlx_xpm_file_to_image(game->mlx, "textures/wall.xpm",
-                                              &img_width, &img_height);
-    if (!game->textures[1])
-    {
-        free_textures(game);
-        cleanup_game(game);
-    }
-
-    game->textures[2] = mlx_xpm_file_to_image(game->mlx, "textures/empty.xpm",
-                                              &img_width, &img_height);
-    if (!game->textures[2])
-    {
-        free_textures(game);
-        cleanup_game(game);
-    }
-
-    game->textures[3] = mlx_xpm_file_to_image(game->mlx, "textures/money6.xpm",
-                                              &img_width, &img_height);
-    if (!game->textures[3])
-    {
-        free_textures(game);
-        cleanup_game(game);
-    }
-
-    game->textures[4] = mlx_xpm_file_to_image(game->mlx, "textures/car.xpm",
-                                              &img_width, &img_height);
-    if (!game->textures[4])
-    {
-        free_textures(game);
-        cleanup_game(game);
-    }
+    load_texture(game, "textures/cj.xpm", 0);
+    load_texture(game, "textures/wall.xpm", 1);
+    load_texture(game, "textures/empty.xpm", 2);
+    load_texture(game, "textures/money6.xpm", 3);
+    load_texture(game, "textures/car.xpm", 4);
 }
 
 void free_textures(t_game *game)

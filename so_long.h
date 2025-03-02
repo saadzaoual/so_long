@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:51:37 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/01 23:15:29 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/02 02:34:31 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,6 @@ int validate_map_contents(char **map);
 int    ft_check_border(char **map, int width, int height);
 void cleanup_game2(t_game *game);
 int is_valid_path(char **map);
+int	has_valid_ber_extension(char *filename);
+void	check_map_dimensions(t_game *game);
 #endif
