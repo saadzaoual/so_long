@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:51:37 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 02:56:43 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/02 03:07:40 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # include <string.h>
 # include <stdio.h>
 # include "./ft_printf/ft_printf.h"
-#include "libft/libft.h"
+# include "libft/libft.h"
 
 typedef struct s_game
 {
@@ -47,12 +47,13 @@ typedef struct s_game
 	void	*textures[5];
 	int		map_height;
 	int		map_width;
-  int   collectibles_collected;
-  int   collectibles_total;
-  int   exit_x;
-  int   exit_y;
+	int		collectibles_collected;
+	int		collectibles_total;
+	int		exit_x;
+	int		exit_y;
 }	t_game;
-void cleanup_game(t_game *game);
+
+void	cleanup_game(t_game *game);
 int		is_key(int keycode);
 int		handle_key_press(int keycode, void *param);
 char	*get_next_line(int fd);
@@ -60,16 +61,17 @@ char	*ft_extract_line(char **str);
 char	**read_map(const char *file_name);
 void	render_map(t_game *game);
 void	free_map(char **map);
-void load_textures(t_game *game);
-void free_textures(t_game *game);
-void move_player(t_game *game);
-int handle_close(t_game *game);
-void count_collectibles(t_game *game);
-int validate_map_contents(char **map);
-int    ft_check_border(char **map, int width, int height);
-void cleanup_game2(t_game *game);
-int is_valid_path(char **map);
-int	has_valid_ber_extension(char *filename);
+void	load_textures(t_game *game);
+void	free_textures(t_game *game);
+void	move_player(t_game *game);
+int		handle_close(t_game *game);
+void	count_collectibles(t_game *game);
+int		validate_map_contents(char **map);
+int		ft_check_border(char **map, int width, int height);
+void	cleanup_game2(t_game *game);
+int		is_valid_path(char **map);
+int		has_valid_ber_extension(char *filename);
 void	check_map_dimensions(t_game *game);
 void	handle_key_movement(int keycode, int *new_x, int *new_y);
+
 #endif
