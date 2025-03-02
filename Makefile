@@ -2,7 +2,7 @@ NAME = so_long
 
 SRC = so_long.c read_map.c render_map.c ft_printf/ft_printf.c ft_printf/ft_printf_functions.c \
 			get_next_line.c get_next_line_utils.c handle_key_press.c load_textures.c validate_map.c \
-			valid_path.c parcing/parcing1.c
+			valid_path.c parcing/parcing1.c parcing/parcing2.c
 
 OBJ = $(SRC:.c=.o)
 
