@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 12:10:16 by szaoual           #+#    #+#             */
-/*   Updated: 2025/02/28 23:19:24 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/01 23:21:13 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,34 +62,30 @@ void load_textures(t_game *game)
         cleanup_game(game);
     }
 }
+
 void free_textures(t_game *game)
 {
-    if (game->mlx)
+    int i = 0;
+    while (i < 5)
     {
-        if (game->textures[0])
-            mlx_destroy_image(game->mlx, game->textures[0]);
-        if (game->textures[1])
-            mlx_destroy_image(game->mlx, game->textures[1]);
-        if (game->textures[2])
-            mlx_destroy_image(game->mlx, game->textures[2]);
-        if (game->textures[3])
-            mlx_destroy_image(game->mlx, game->textures[3]);
-        if (game->textures[4])
-            mlx_destroy_image(game->mlx, game->textures[4]);
+        if (game->textures[i])
+            mlx_destroy_image(game->mlx, game->textures[i]);
+        i++;
     }
 }
+
 void cleanup_game(t_game *game)
 {
     if (game)
     {
         free_textures(game);
-        
+
         if (game->mlx && game->window)
             mlx_destroy_window(game->mlx, game->window);
-        
+
         if (game->map)
             free_map(game->map);
-            
+
         if (game->mlx)
         {
             mlx_destroy_display(game->mlx);
@@ -98,22 +94,24 @@ void cleanup_game(t_game *game)
     }
     exit(0);
 }
+
 int handle_close(t_game *game)
 {
     cleanup_game(game);
     return (0);
 }
+
 void cleanup_game2(t_game *game)
 {
     if (game)
     {
         if (game->map)
             free_map(game->map);
-            
+
         if (game->mlx)
         {
-           mlx_destroy_display(game->mlx);
-           free(game->mlx);
+            mlx_destroy_display(game->mlx);
+            free(game->mlx);
         }
     }
     exit(0);

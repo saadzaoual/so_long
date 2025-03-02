@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:05:39 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/01 22:54:05 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/01 23:22:15 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int handle_key_press(int keycode, void *param)
     if (is_key(keycode))
     {
         moves++;
-        printf("Moves: %d\n", moves);
+        ft_printf("Moves: %d\n", moves);
 
         if (game->map[new_y][new_x] == MONEY)
         {
@@ -54,18 +54,14 @@ int handle_key_press(int keycode, void *param)
             game->map[new_y][new_x] = EMPTY;
         }
 
-        if (game->map[new_y][new_x] == EXIT)
+        if (game->map[new_y][new_x] == EXIT && game->collectibles_collected == game->collectibles_total)
         {
-            if (game->collectibles_collected == game->collectibles_total)
-            {
-                ft_printf("You collected all money! Game over.\n");
-                cleanup_game(game);
-            }
-            else
-            {
-                ft_printf("Collect all money first!\n");
-                return (0);
-            }
+            ft_printf("You collected all money! Game over.\n");
+            cleanup_game(game);
+        }
+        else if (game->map[new_y][new_x] == EXIT)
+        {
+            ft_printf("Collect all money first!\n");
         }
 
         mlx_put_image_to_window(game->mlx, game->window, game->textures[2],
@@ -91,9 +87,9 @@ int handle_key_press(int keycode, void *param)
 
 void move_player(t_game *game)
 {
-    int x, y;
+    int x = 0;
+    int y = 0;
 
-    y = 0;
     while (game->map[y])
     {
         x = 0;
@@ -113,11 +109,11 @@ void move_player(t_game *game)
 
 void count_collectibles(t_game *game)
 {
-    int x, y;
+    int x = 0;
+    int y = 0;
 
     game->collectibles_total = 0;
     game->collectibles_collected = 0;
-    y = 0;
     while (game->map[y])
     {
         x = 0;
@@ -129,5 +125,5 @@ void count_collectibles(t_game *game)
         }
         y++;
     }
-    printf("Total collectibles: %d\n", game->collectibles_total);
+    ft_printf("Total collectibles: %d\n", game->collectibles_total);
 }

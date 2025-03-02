@@ -6,7 +6,7 @@
 /*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:08:01 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/01 22:54:41 by szaoual          ###   ########.fr       */
+/*   Updated: 2025/03/01 23:21:13 by szaoual          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,13 @@ int main(int ac, char **av)
     count_collectibles(&game);
     move_player(&game);
 
-    // Set exit coordinates
-    for (int y = 0; y < game.map_height; y++)
+    // Set exit coordinates directly
+    int y = 0;
+    int x = 0;
+    while (y < game.map_height && game.exit_x == -1 && game.exit_y == -1)
     {
-        for (int x = 0; x < game.map_width; x++)
+        x = 0;
+        while (x < game.map_width)
         {
             if (game.map[y][x] == EXIT)
             {
@@ -93,7 +96,9 @@ int main(int ac, char **av)
                 game.exit_y = y;
                 break;
             }
+            x++;
         }
+        y++;
     }
 
     render_map(&game, game.mlx, game.window, game.map, game.textures);
