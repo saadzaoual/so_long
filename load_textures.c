@@ -6,7 +6,7 @@
 /*   By: isel-kha <isel-kha@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 23:55:18 by isel-kha          #+#    #+#             */
-/*   Updated: 2025/03/25 23:55:20 by isel-kha         ###   ########.fr       */
+/*   Updated: 2025/03/26 00:53:29 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	load_textures(t_game *game)
 		cleanup_game(game);
 	}
 	init_null(game);
-	load_texture(game, "textures/cj.xpm", 0);
+	load_texture(game, "textures/player.xpm", 0);
 	load_texture(game, "textures/wall.xpm", 1);
 	load_texture(game, "textures/empty.xpm", 2);
 	load_texture(game, "textures/money6.xpm", 3);
-	load_texture(game, "textures/car.xpm", 4);
+	load_texture(game, "textures/gate.xpm", 4);
 }
 
 void	free_textures(t_game *game)
