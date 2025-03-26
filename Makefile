@@ -8,11 +8,10 @@ OBJ = $(SRC:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I. -g3
+CFLAGS = -Wall -Wextra -Werror
 
-MLX_DIR = minilibx-linux
-MLX = $(MLX_DIR)/libmlx.a
-MLXFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
+
+MLXFLAGS = -lmlx -lXext -lX11
 
 LIBFT = libft/libft.a
 
@@ -24,16 +23,12 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX)
 $(LIBFT): FORCE
 	@make -C libft --no-print-directory
 
-$(MLX): FORCE
-	@make -C $(MLX_DIR) --no-print-directory
-
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)
 	@make clean -C libft --no-print-directory
-	@make clean -C $(MLX_DIR) --no-print-directory
 
 fclean: clean
 	rm -f $(NAME)

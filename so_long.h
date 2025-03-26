@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isel-kha <isel-kha@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 15:51:37 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 16:57:58 by szaoual          ###   ########.fr       */
+/*   Created: 2025/03/25 23:55:42 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/03/25 23:55:44 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,9 @@
 # define MAX_HEIGHT 100
 # define BUFFER_SIZE 1
 
-# include "./minilibx-linux/mlx.h"
+# include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <string.h>
-# include <stdio.h>
 # include "./ft_printf/ft_printf.h"
 # include "libft/libft.h"
 
@@ -73,5 +71,7 @@ int		is_valid_path(char **map);
 int		has_valid_ber_extension(char *filename);
 void	check_map_dimensions(t_game *game);
 void	handle_key_movement(int keycode, int *new_x, int *new_y);
+void	exit_with_cleanup(t_game *game, char *error_message);
+void	init_null(t_game *game);
 
 #endif

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   valid_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isel-kha <isel-kha@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 23:04:28 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 02:59:14 by szaoual          ###   ########.fr       */
+/*   Created: 2025/03/25 23:55:46 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/03/25 23:55:51 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// TODO: Copy map dlkhra!$@!$@#%
 
 char	**copy_map(char **map)
 {

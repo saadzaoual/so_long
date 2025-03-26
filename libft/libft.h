@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szaoual <szaoual@student.42.fr>            +#+  +:+       +#+        */
+/*   By: isel-kha <isel-kha@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 15:05:47 by szaoual           #+#    #+#             */
-/*   Updated: 2025/02/27 11:49:51 by szaoual          ###   ########.fr       */
+/*   Created: 2025/03/25 23:59:09 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/03/25 23:59:09 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 

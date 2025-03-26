@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isel-kha <isel-kha@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 12:10:16 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 17:38:23 by szaoual          ###   ########.fr       */
+/*   Created: 2025/03/25 23:55:18 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/03/25 23:55:20 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ void	load_texture(t_game *game, char *path, int index)
 		free_textures(game);
 		cleanup_game(game);
 	}
-}
-
-void init_null(t_game *game)
-{
-	game->textures[0] = NULL;
-	game->textures[1] = NULL;
-	game->textures[2] = NULL;
-	game->textures[3] = NULL;
-	game->textures[4] = NULL;
 }
 
 void	load_textures(t_game *game)

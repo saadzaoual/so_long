@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isel-kha <isel-kha@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 13:49:40 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 17:06:25 by szaoual          ###   ########.fr       */
+/*   Created: 2025/03/25 23:55:53 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/03/25 23:55:58 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_invalid_chars(char **map)
 				map[row][col] != 'C' && map[row][col] != '1' &&
 				map[row][col] != '0' && map[row][col] != '\n')
 			{
-				ft_printf("Error: Invalid character '%c' in map\n", map[row][col]);
+				ft_printf("Invalid character '%c' in map\n", map[row][col]);
 				return (1);
 			}
 			col++;

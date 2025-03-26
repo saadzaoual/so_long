@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parcing1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szaoual <szaoual@1337.ma>                  +#+  +:+       +#+        */
+/*   By: isel-kha <isel-kha@students.1337.ma>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/02 02:33:25 by szaoual           #+#    #+#             */
-/*   Updated: 2025/03/02 02:41:22 by szaoual          ###   ########.fr       */
+/*   Created: 2025/03/25 23:54:52 by isel-kha          #+#    #+#             */
+/*   Updated: 2025/03/25 23:54:55 by isel-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
 int	has_valid_ber_extension(char *filename)
 {
